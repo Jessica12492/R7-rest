@@ -14,7 +14,7 @@ class Api::V1::MembersController < ApplicationController
     # GET /members/:id
     def show
       # your code goes here
-      @member = Member.find(member_params)
+     
      # render json: @member
       render json: { message: "If you see this, you're in!" }
     end
@@ -49,11 +49,11 @@ class Api::V1::MembersController < ApplicationController
     private
   
     def member_params
-      params.require(:member).permit(:first_name, :last_name)
+      params.require(:member).permit(:first_name, :last_name,:member_id)
     end
   
     def set_member
-      @member = Member.find(params[:member_id])
+      @member = Member.find(params[:id])
     end
 end
 

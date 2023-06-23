@@ -21,16 +21,17 @@ class Api::V1::FactsController < ApplicationController
 
   # POST /members/:member_id/facts
   def create
-     @member = Member.find(params[:member_id])
-    @fact = @member.facts.new(fact_params)
-    if @fact.save
-      render json: @fact, status: 201
-    else
-      render json: { error: 
+    
+    @member = Member.find(params[:member_id])
+   @fact = @member.facts.new(fact_params)
+   if @fact.save
+     render json: @fact, status: 201
+   else
+     render json: { error: 
 "The fact entry could not be created. #{@fact.errors.full_messages.to_sentence}"},
-      status: 400
-    end
-  end
+     status: 400
+   end
+ end
 
   # PUT /members/:member_id/facts/:id
   def update
@@ -54,7 +55,7 @@ else
   private
 
   def fact_params
-    params.require(:fact).permit(:fact_text, :likes)
+    params.require(:fact).permit(:fact_text, :likes,:member_id)
   end
 
   def set_fact
