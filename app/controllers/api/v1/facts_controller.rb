@@ -2,8 +2,9 @@ class Api::V1::FactsController < ApplicationController
     include AuthenticationCheck
 
   before_action :is_user_logged_in
+  before_action :set_member, only: [:index, :show, :update, :destroy]
   before_action :set_fact, only: [:show, :update, :destroy]
-
+  
   # GET /members/:member_id/facts
   def index
     @member = Member.find(params[:member_id])
@@ -17,7 +18,7 @@ class Api::V1::FactsController < ApplicationController
  
       render json: @fact
     end
-  end
+  
 
   # POST /members/:member_id/facts
   def create
@@ -42,16 +43,14 @@ class Api::V1::FactsController < ApplicationController
 else
     render json: { error: 'Unable to update Fact record.'}, status: 400
   end
-
+end
   # DELETE /members/:member_id/facts/:id
   def destroy
-    # your code goes here
-    @fact.destroy
-    render json: { message: 'Fact record successfully deleted.'}, status: 200
-  
-    render json: { error: 'Unable to delete Fact record .'}, status: 400
-  end
 
+  
+    @fact.destroy
+    render json: @member.facts, status: :ok
+end
   private
 
   def fact_params
@@ -60,5 +59,9 @@ else
 
   def set_fact
     @fact = Fact.find(params[:id])
+  end
+
+  def set_member
+    @member = Member.find(params[:member_id])
   end
 end
