@@ -15,7 +15,7 @@ class Api::V1::MembersController < ApplicationController
     def show
       # your code goes here
      
-     # render json: @member
+     render json: @member
       render json: { message: "If you see this, you're in!" }
     end
   
@@ -35,9 +35,9 @@ class Api::V1::MembersController < ApplicationController
     def update
       # your code godes here
       if @member.update(member_params)
-        render json:   { message: 'Member record successfully updated.'}, status: 200
+        render json:   { message: "Member record successfully updated."}, status: 200
       else
-        render json: { error: 'Unable to update Member.'}, status: 400 
+        render json: { error: "Unable to update Member.#{@member.errors.full_messages.to_sentence}"}, status: 400 
     end
   end
     # DELETE /members/:id
@@ -49,7 +49,7 @@ class Api::V1::MembersController < ApplicationController
     private
   
     def member_params
-      params.require(:member).permit(:first_name, :last_name,:member_id)
+      params.require(:member).permit(:first_name, :last_name)
     end
   
     def set_member

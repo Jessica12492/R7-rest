@@ -39,22 +39,21 @@ class Api::V1::FactsController < ApplicationController
     # your code goes here
    
     if @fact.update(fact_params)
-    render json: { message: 'Fact record successfully updated.'}, status: 200
+    render json: { message: "Fact record successfully updated."}, status: 200
 else
-    render json: { error: 'Unable to update Fact record.'}, status: 400
+    render json: { error: "Unable to update Fact record. #{@fact.errors.full_messages.to_sentence}"}, status: 400
   end
 end
   # DELETE /members/:member_id/facts/:id
   def destroy
 
-  
     @fact.destroy
-    render json: @member.facts, status: :ok
+    render json: @member.facts
 end
   private
 
   def fact_params
-    params.require(:fact).permit(:fact_text, :likes,:member_id)
+    params.require(:fact).permit(:fact_text, :likes)
   end
 
   def set_fact
