@@ -48,7 +48,7 @@ end
   def destroy
 
     @fact.destroy
-    render json: @member.facts
+    render json: @member.facts, status: ok
 end
   private
 
