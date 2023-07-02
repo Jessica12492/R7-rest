@@ -35,6 +35,7 @@ RSpec.configure do |config|
       servers: [
         {
           url: "#{ENV['APPLICATION_URL']}"
+          
         }
       ]
     }
