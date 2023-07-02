@@ -41,6 +41,10 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 end
 
+gem 'rspec-rails'
+gem 'rexml'
+gem 'rswag'
+
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
@@ -51,3 +55,9 @@ end
 gem 'devise'
 gem 'devise-jwt'
 gem 'rack-cors'
+
+group :test do
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'rails-controller-testing'
+end
