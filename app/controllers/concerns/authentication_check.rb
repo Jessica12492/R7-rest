@@ -5,6 +5,7 @@ module AuthenticationCheck
       if current_user.nil?
         render json: { message: "No user is authenticated." },
           status: :unauthorized
+       
       end
     end
   end
